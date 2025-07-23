@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import type { PokemonInfoResponse } from "../types/PokemonsInfoResponse";
 import type { Pokemon } from "../types/Pokemon";
 
-const BASE_URL = "https://pokeapi.co/api/v2/";
+export const BASE_URL = "https://pokeapi.co/api/v2/";
 
 export const pokemonApi = createApi({
   reducerPath: "pokemonApi",

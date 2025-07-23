@@ -1,14 +1,15 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGetPokemonByUrlQuery } from '../store/pokemonApi';
+import {useGetPokemonByUrlQuery, BASE_URL } from '../store/pokemonApi';
 
 export default function PokemonDetails () {
    const params = useParams();
-   const url:string = `pokemon/${params.id}`;
-   const { data, error, isLoading } = useGetPokemonByUrlQuery(url);
+   const url:string = `${BASE_URL}pokemon/${params.id}/`;
+   const { data, error, isLoading, isFetching } = useGetPokemonByUrlQuery(url);
    const navigate = useNavigate();
 
-  {isLoading && <div>Loading...</div>}
-  {error && <div>Error loading </div>}
+  if(isLoading || isFetching) return <div>Loading...</div>
+  if(error) return <div>Error loading </div>
+
   return (
     <div className='max-screen-lg mx-auto bg-gradient-to-r from-white to-pink-100 p-12'>
       <button onClick={() => navigate('/')} className='my-4 bg-white shadow-sm hover:bg-gray-300 text-gray-800 font-bold p-4 rounded'>
