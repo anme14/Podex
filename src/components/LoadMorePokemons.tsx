@@ -3,6 +3,7 @@ import { FixedSizeGrid as Grid } from "react-window";
 import { useGetPokemonsInfoQuery } from "../store/pokemonApi";
 import PokemonCard from "./PokemonCard";
 import type { PokemonInfo } from "../types/PokemonInfo";
+import Loader from "./Loader";
 
 const PAGE_SIZE = 16;
 const CARD_HEIGHT = 150;
@@ -71,14 +72,15 @@ export default function LoadMorePokemons() {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-150px)] py-4 px-6 mx-auto">
-      <div ref={containerRef} className="flex-grow overflow-x-hidden">
-        {isLoading && pokemons.length === 0 && (
-          <div className="text-center p-4">Loading...</div>
-        )}
+    <>
+     {isLoading && pokemons.length === 0 && (
+          <Loader/>
+      )}
         {error && (
           <div className="text-center p-4">Error loading pokemons.</div>
         )}
+    <div className="flex flex-col h-[calc(100vh-150px)] py-4 px-6 mx-auto">
+      <div ref={containerRef} className="flex-grow overflow-x-hidden">       
         {dimensions.width > 0 && (
           <div className="flex justify-center">
             <Grid
@@ -113,5 +115,6 @@ export default function LoadMorePokemons() {
         </div>
       )}
     </div>
+    </>
   );
 }

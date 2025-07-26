@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useGetPokemonsInfoQuery } from "../store/pokemonApi";
 import PokemonGrid from "./PokemonGrid";
+import Loader from "./Loader";
 
 const PAGE_SIZE = 16;
 
@@ -16,7 +17,7 @@ export default function PaginationPokemons() {
 
   return (
     <>
-      {isLoading && <div>Loading...</div>}
+      {isLoading && <Loader/>}
       {error && <div>Error loading pokemons.</div>}
       <PokemonGrid pokemons={data?.results ?? []} />
       <div className="flex justify-center items-center my-1 p-2">
